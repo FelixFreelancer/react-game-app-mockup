@@ -58,7 +58,8 @@ class Category extends React.Component {
                                         return (
                                             <li key={index}>
                                                 <Link to={category.url}>
-                                                    <img src={category.img} className="img-responsive img-but" />
+                                                    <img alt={"category thumb"}
+                                                        src={category.img} className="img-responsive img-but" />
                                                 </Link>
                                             </li>
 

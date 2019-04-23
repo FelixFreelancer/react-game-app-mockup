@@ -30,7 +30,8 @@ class SideBar extends React.Component {
                                 return (
                                     <li key={index}>
                                         <Link to={sidebar_icon.url}>
-                                            <img src= {server_url + process.env.PUBLIC_URL + 'assets/images/img-1.png'} className="img-responsive" />
+                                            <img alt={"side thumbnail"}
+                                                src= {server_url + process.env.PUBLIC_URL + 'assets/images/img-1.png'} className="img-responsive" />
                                         </Link>
                                     </li>
                                 )

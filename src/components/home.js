@@ -57,7 +57,8 @@ class Home extends React.Component {
                             <div className="col-lg-5 col-md-5 col-sm-12">
                                 <div className="col-md-12">
                                     <Link to={this.state.stream_url}>
-                                        <img src={process.env.PUBLIC_URL + 'assets/images/img.png'}
+                                        <img alt={"background"}
+                                            src={process.env.PUBLIC_URL + 'assets/images/img.png'}
                                              className="home-first-row img-responsive img-but"/>
                                     </Link>
                                 </div>
@@ -67,7 +68,7 @@ class Home extends React.Component {
                                     return (
                                         <div key={index} className="col-lg-6 col-md-6 col-sm-12">
                                             <Link to={ads_channel.url}>
-                                                <img src={ads_channel.img}
+                                                <img alt={"ads channel"} src={ads_channel.img}
                                                      className="home-first-row img-responsive img-but "/>
                                             </Link>
                                         </div>
@@ -86,7 +87,8 @@ class Home extends React.Component {
                                     return (
                                         <li key={key}>
                                             <Link to={featured_channel.url}>
-                                                <img src={featured_channel.img} className="img-responsive img-but"/>
+                                                <img alt={"featured channel"}
+                                                    src={featured_channel.img} className="img-responsive img-but"/>
                                             </Link>
                                         </li>
                                     )
@@ -104,7 +106,8 @@ class Home extends React.Component {
                                 </Link>
                                 <div className={"browse-channel-img"}>
                                     <button className={"img-button featured-giveway-imgBtn"}>
-                                    <img src={process.env.PUBLIC_URL + 'assets/images/img.png'}
+                                    <img alt={"background"}
+                                        src={process.env.PUBLIC_URL + 'assets/images/img.png'}
                                          className="img-responsive img-but"/>
                                     </button>
                                 </div>
@@ -120,7 +123,8 @@ class Home extends React.Component {
                                 return (
                                     <div key={index} className="col-lg-3 col-md-3 col-sm-12">
                                         <Link to={browse_giveaway.url}>
-                                        <img src={browse_giveaway.img}
+                                        <img alt={"browse giveaway"}
+                                            src={browse_giveaway.img}
                                         className="img-responsive img-but"/>
                                         </Link>
                                     </div>

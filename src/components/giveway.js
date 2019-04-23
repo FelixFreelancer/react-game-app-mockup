@@ -69,7 +69,8 @@ class GiveWay extends React.Component {
                                         <div key={index} className="col-lg-4 col-md-4 col-md-12">
                                             <h1 className="center uppercase">{giveaway.title}</h1>
                                             <button className={"img-button"}>
-                                                <img src={server_url+giveaway.img} className="img-responsive"/>
+                                                <img alt={"giveway thumb"}
+                                                    src={server_url+giveaway.img} className="img-responsive"/>
                                             </button>
                                             <div className="center margin-top20">
                                                 <button className="own-btn btn btn-blue btn-primary uppercase">Enter
@@ -93,7 +94,8 @@ class GiveWay extends React.Component {
                                                                 <div className="flout-left full-w-left">
                                                                     <div className="flout-left">
                                                                         <button className={"img-button"}>
-                                                                            <img src={server_url + other_giveaway.img}
+                                                                            <img alt={"other giveway"}
+                                                                                src={server_url + other_giveaway.img}
                                                                                  className="img-responsive"/>
                                                                         </button>
                                                                     </div>
@@ -108,7 +110,8 @@ class GiveWay extends React.Component {
                                                                 </div>
                                                                 <div className="flout-right full-w-right">
                                                                     <button className={"img-button"}>
-                                                                        <img src={server_url + other_giveaway.game_img}
+                                                                        <img alt={"other giveway"}
+                                                                            src={server_url + other_giveaway.game_img}
                                                                              className="img-responsive"/>
                                                                     </button>
                                                                 </div>

@@ -2,9 +2,10 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 
 class HeaderNav extends React.Component {
-    constructor(props) {
-        super(props)
+    preventLink = (e) => {
+        e.preventDefault()
     }
+
     render() {
 
         return (
@@ -35,12 +36,12 @@ class HeaderNav extends React.Component {
                                 <li><NavLink to={"/game-live"}>game live link</NavLink></li>
                                 <li><NavLink to={"/live-stream"}>live stream link</NavLink></li>
                                 <li><NavLink to={"/user-settings"}>user settings link</NavLink></li>
-                                <li ><a href="javascript:void(0)">
+                                <li ><NavLink to={"/"} onClick={this.preventLink}>
 
                                      <button style={{backgroundColor: 'transparent', padding: '0 10px'}}
                                          onClick={() => {this.props.onClick()}}>{this.props.online_status? 'Offline' : 'Online'}</button>
                                     
-                                </a>
+                                </NavLink>
                                 </li>
                             </ul>
                             <ul className="nav navbar-nav navbar-right">

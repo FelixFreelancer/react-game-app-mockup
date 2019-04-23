@@ -72,7 +72,8 @@ class GameLive extends React.Component {
                                 <div className="width-50 flout-left">
                                     <div className="flout-left">
                                         <button className={"img-button"}>
-                                            <img src={this.state.game_category.img} className="img-responsive img-but"/>
+                                            <img alt={"game category"}
+                                                src={this.state.game_category.img} className="img-responsive img-but"/>
                                         </button>
                                     </div>
                                     <div className="stream-headline">
@@ -95,12 +96,14 @@ class GameLive extends React.Component {
                                         return (
                                             <li key={index}>
                                                 <Link to={stream_entry.url}>
-                                                    <img src={stream_entry.main_img}
+                                                    <img alt={"stream entry"}
+                                                        src={stream_entry.main_img}
                                                          className="img-responsive img-but"/>
                                                 </Link>
                                                 <div>
                                                     <div className="flout-left m-r-20">
-                                                        <img src={stream_entry.user_img}
+                                                        <img alt={"stream entry"}
+                                                            src={stream_entry.user_img}
                                                              className="img-responsive img-but"/>
                                                     </div>
                                                     <div>

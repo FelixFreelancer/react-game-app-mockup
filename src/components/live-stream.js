@@ -133,13 +133,13 @@ class LiveStream extends React.Component {
                                 this.props.online_status ? <div className={"live-stream-featured-links row"}>
                                     <div className="col-md-8 bg-gray mar-bot30 gutter">
                                         <button className={"img-button"}>
-                                            <img src={this.state.game_entry.game_img}
+                                            <img src={this.state.game_entry.game_img} alt={"game entry"}
                                                 className="img-responsive"/>
                                         </button>
                                         <div className="col-md-7 col-sm-12 padding-top20">
                                             <div className="col-md-2 gutter mo-de-img">
                                                 <button className={"img-button"}>
-                                                <img
+                                                <img alt={"game thumbnail"}
                                                     src={this.state.game_entry.game_thumb}
                                                     className="img-responsive m-b-30"/>
                                                 </button>
@@ -162,7 +162,7 @@ class LiveStream extends React.Component {
                                                 className="border-yellow">{this.state.game_entry.coins}</span></div>
                                             <div className="progr padding-top20">
                                                 <ul>
-                                                    <li><img
+                                                    <li><img alt={"progress bar"}
                                                         src={server_url+process.env.PUBLIC_URL + 'assets/images/prograss-bar.png'}
                                                         className="img-responsive img-but"/></li>
                                                     <li style={{fontSize: '16px'}}><i
@@ -178,7 +178,8 @@ class LiveStream extends React.Component {
                                         {this.state.ads_channels.map((ads_channel, index) => {
                                             return (
                                                 <Link key={index} to={ads_channel.url} >
-                                                    <img src={ads_channel.img}
+                                                    <img alt={"ads channel"}
+                                                        src={ads_channel.img}
                                                          className="img-responsive img-but"/>
                                                 </Link>
                                             )
@@ -190,7 +191,8 @@ class LiveStream extends React.Component {
                             <div className="col-md-12 bg-gray m-b-30">
                                 <div className="col-lg-7 col-md-12 margin-top20">
                                     <h1 className="uppercase p-t-15">{this.state.giveaway_header_title}</h1>
-                                    <div className="col-lg-6 col-md-6 col-sm-12"><img
+                                    <div className="col-lg-6 col-md-6 col-sm-12">
+                                        <img alt={"thumbnail"}
                                         src={server_url+process.env.PUBLIC_URL + 'assets/images/img5.png'}
                                         className="img-responsive img-but"/></div>
                                     <div className="col-lg-6 col-md-6 col-sm-12 center">
@@ -217,7 +219,8 @@ class LiveStream extends React.Component {
                                                             <div className="flout-right s-f bg-gray">
                                                                 <div>
                                                                     <button className={"img-button"}>
-                                                                        <img src={complete_coin.box_image}
+                                                                        <img alt={"box thumbnail"}
+                                                                            src={complete_coin.box_image}
                                                                              className="img-responsive leable-img"/>
                                                                     </button>
                                                                     {complete_coin.coin_amount}
@@ -263,7 +266,7 @@ class LiveStream extends React.Component {
                                                             <div className="flout-right s-f bg-gray">
                                                                 <div>
                                                                     <button className={"img-button"}>
-                                                                        <img src={bonus_coin.box_image}
+                                                                        <img alt={"box thumbnail"} src={bonus_coin.box_image}
                                                                              className="img-responsive leable-img"/>
                                                                     </button>
                                                                     {bonus_coin.coin_amount}
@@ -301,7 +304,8 @@ class LiveStream extends React.Component {
                                                         <li key={index}>
                                                             <div className="flout-left">
                                                                 <div className="flout-left">
-                                                                    <img src={past_winner.img}
+                                                                    <img alt={"past winner"}
+                                                                        src={past_winner.img}
                                                                          className="img-responsive"/>
                                                                 </div>
                                                                 <div className="flout-right side-past-date">
@@ -327,16 +331,19 @@ class LiveStream extends React.Component {
                                     this.props.online_status ?
                                         <div>
                                             <div className="chat-bg">
-                                                <img src={server_url+process.env.PUBLIC_URL + 'assets/images/chat-bg.png'}
+                                                <img alt={"chat bg"}
+                                                    src={server_url+process.env.PUBLIC_URL + 'assets/images/chat-bg.png'}
                                                      className="img-responsive img-but"/>
                                             </div>
                                             <div className="clearfix"/>
                                         </div>
                                         :
                                         <div>
-                                            <img src={server_url+process.env.PUBLIC_URL + 'assets/images/img5.png'}
+                                            <img alt={"background"}
+                                                src={server_url+process.env.PUBLIC_URL + 'assets/images/img5.png'}
                                                  className="img-responsive img-but padding-top20 p-b20"/>
-                                            <img src={server_url+process.env.PUBLIC_URL + 'assets/images/img5.png'}
+                                            <img alt={"background"}
+                                                 src={server_url+process.env.PUBLIC_URL + 'assets/images/img5.png'}
                                                  className="img-responsive img-but p-b20"/>
                                         </div>
                                 }

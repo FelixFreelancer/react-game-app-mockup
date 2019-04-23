@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 class UserSettings extends React.Component {
     openCity = (evt, cityName) => {
@@ -60,7 +61,32 @@ class UserSettings extends React.Component {
         },{
             service: 'Mixer'
         }],
-        service_url: 'state url'
+        service_url: 'state url',
+        entry_options: [{
+            entry_color_class: 'discord-bg',
+            entry_icon: 'fa fa-slideshare',
+            entry_label: 'JOIN DISCORD',
+        },{
+            entry_color_class: 'twitch-bg',
+            entry_icon: 'fa fa-twitch',
+            entry_label: 'follow on twitch',
+        },{
+            entry_color_class: 'youtube-bg',
+            entry_icon: 'fa fa-youtube-play',
+            entry_label: 'watch youtube video',
+        },{
+            entry_color_class: 'twitter-bg',
+            entry_icon: 'fa fa-twitter',
+            entry_label: 'retweet on twitter',
+        },{
+            entry_color_class: 'facebook-bg',
+            entry_icon: 'fa fa-facebook',
+            entry_label: 'visit facebook page',
+        },{
+            entry_color_class: 'steam-bg',
+            entry_icon: 'fa fa fa-steam',
+            entry_label: 'join steam group',
+        },]
     }
 
     onChangeInputUrl = (event) => {
@@ -90,7 +116,7 @@ class UserSettings extends React.Component {
                                 <h1>User settings</h1>
                                 <div className="user-box">
                                     <div className="flout-left">
-                                        <img src={this.state.user.img} className="img-but img-responsive"/>
+                                        <img src={this.state.user.img} className="img-but img-responsive" alt="user"/>
                                         <div>
                     <span className="own-btn upload-but avter-but btn-file">
                       UPLOAD NEW AVATAR <input type="file"/>
@@ -158,13 +184,13 @@ class UserSettings extends React.Component {
                                                             {connection.label}
                                                         </button>
                                                         <span> <span><img
-                                                            src={connection.check_img}
+                                                            src={connection.check_img} alt={"check"}
                                                             className="img-responsive"/></span> {connection.username}</span>
                                                     </li>
                                                 )
                                             })}
                                         </ul>
-                                    </div>
+                                    </div>join discord
                                     <div className="clearfix"/>
                                     <h2>Select Streaming Service</h2>
                                     <hr/>
@@ -225,180 +251,48 @@ class UserSettings extends React.Component {
                                     <div className="col-md-6">
                                         <div className="Entry-list">
                                             <ul>
-                                                <li>
-                                                    <div className="discord-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-slideshare"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">join discord</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="twitch-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-twitch"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">follow on twitch</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="youtube-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i
-                                                            className="fa fa-youtube-play" aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">watch youtube video</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="twitter-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-twitter"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">retweet on twitter</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="facebook-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-facebook"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">visit facebook page</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="steam-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa fa-steam"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">join steam group</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
+                                                {this.state.entry_options.map((entry_option, index) => {
+                                                    return (
+                                                        <li key={index}>
+                                                            <div className={entry_option.entry_color_class + " entry-listing color-white"}>
+                                                                <div className="Entry-list-icon"><i className={entry_option.entry_icon}
+                                                                                                    aria-hidden="true"/></div>
+                                                                <div className="toggle-lable">
+                                                                    <label className="switch">
+                                                                        <input type="checkbox" defaultChecked/>
+                                                                        <span className="slider round"/>
+                                                                    </label>
+                                                                </div>
+                                                                <div className="title-entry">{entry_option.entry_label}</div>
+                                                                <div className="entry-link"><Link to="#">EDIT</Link></div>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })}
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="Entry-list">
                                             <ul>
-                                                <li>
-                                                    <div className="discord-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-slideshare"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">join discord</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="twitch-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-twitch"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">follow on twitch</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="youtube-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i
-                                                            className="fa fa-youtube-play" aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">watch youtube video</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="twitter-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-twitter"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">retweet on twitter</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="facebook-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa-facebook"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">visit facebook page</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div className="steam-bg entry-listing color-white">
-                                                        <div className="Entry-list-icon"><i className="fa fa fa-steam"
-                                                                                            aria-hidden="true"/></div>
-                                                        <div className="toggle-lable">
-                                                            <label className="switch">
-                                                                <input type="checkbox" defaultChecked/>
-                                                                <span className="slider round"/>
-                                                            </label>
-                                                        </div>
-                                                        <div className="title-entry">join steam group</div>
-                                                        <div className="entry-link"><a href="#">EDIT</a></div>
-                                                    </div>
-                                                </li>
+                                                {this.state.entry_options.map((entry_option, index) => {
+                                                    return (
+                                                        <li key={index}>
+                                                            <div className={entry_option.entry_color_class + " entry-listing color-white"}>
+                                                                <div className="Entry-list-icon"><i className={entry_option.entry_icon}
+                                                                                                    aria-hidden="true"/></div>
+                                                                <div className="toggle-lable">
+                                                                    <label className="switch">
+                                                                        <input type="checkbox" defaultChecked/>
+                                                                        <span className="slider round"/>
+                                                                    </label>
+                                                                </div>
+                                                                <div className="title-entry">{entry_option.entry_label}</div>
+                                                                <div className="entry-link"><Link to="#">EDIT</Link></div>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })}
                                             </ul>
                                         </div>
                                     </div>

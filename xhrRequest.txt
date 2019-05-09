@@ -1,0 +1,9 @@
+var xhr = new XMLHttpRequest();
+var url = "http://localhost:8000/api/profile/";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader('Authorization', 'Token cfa592f065e3e226478eb15cde70aaebc64f7717')
+xhr.onreadystatechange = function () {
+if (xhr.readyState === 4 && xhr.status === 200) {
+var json = JSON.parse(xhr.responseText);
+xhr.send(twitch);

@@ -1,16 +1,17 @@
 import React from 'react'
 import {Link, NavLink} from "react-router-dom";
-import Popup from "reactjs-popup";
+// import Popup from "reactjs-popup";
 
+let temp_new_entry_option = {}
 
 class UserSettings extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             edit_giveaway: '',
             update_giveaway: '',
             new_giveaway: '',
-            new_giveaway_entry: [],
+            new_entry_options: [],
             social_connections: [{
                 icon: 'fa fa-steam',
                 label: 'steam',
@@ -59,7 +60,7 @@ class UserSettings extends React.Component {
             service_url: 'state url',
             entry_options: [{
                 entry_color_class: 'discord-bg',
-                entry_icon: 'fa fa-slideshare',
+                entry_icon: 'fab fa-discord',
                 entry_label: 'JOIN DISCORD',
                 entry_url: 'giveaway1'
             }, {
@@ -122,6 +123,13 @@ class UserSettings extends React.Component {
             update_giveaway: e.target.value,
         })
     }
+
+    handleChooseEntry = (index) => {
+        this.setState({
+            new_giveaway: this.state.entry_options[index].entry_url
+        })
+        temp_new_entry_option = this.state.entry_options[index]
+    }
     handleEditGiveaway = (url, index) => {
         this.setState({
             edit_giveaway: url,
@@ -129,28 +137,25 @@ class UserSettings extends React.Component {
         })
     }
     handleUpdateGiveaway = () => {
-        console.log(this.state.entry_options[this.state.edit_giveaway_index])
-        //entry_options[this.state.edit_giveaway_index]: {
-        //                 entry_url: update_giveaway
-        //         }
-
+        // console.log(this.state.entry_options[this.state.edit_giveaway_index])
+        alert(this.state.update_giveaway)
         this.setState({
-            update_giveaway:'',
+            update_giveaway: '',
             edit_giveaway: '',
         })
 
     }
-    handleAddNewGiveaway = () => {
-       this.state.new_giveaway_entry.push(this.state.new_giveaway)
-        console.log(this.state.new_giveaway_entry)
+    handleAddNewEntry = () => {
         this.setState({
-            new_giveaway: ''
+            new_giveaway: '',
         })
+        this.state.new_entry_options.push(temp_new_entry_option)
     }
 
     handleStartGiveaway = () => {
-        window.alert(JSON.stringify(this.state.new_giveaway_entry, null, 2))
+        window.alert(JSON.stringify(this.state.new_entry_options, null, 2))
     }
+
     render() {
         // document.getElementById("defaultOpen").click();
         return (
@@ -309,23 +314,16 @@ class UserSettings extends React.Component {
                                     <div className="clearfix"/>
                                     <h1>Entry Options</h1>
                                     <br/>
-                                    <div className="col-md-6">
-                                        <div className="Entry-list">
-                                            <ul>
-                                                {this.state.entry_options.map((entry_option, index) => {
+                                    <div className="" style={{display: 'flex'}}>
+                                        <div className="Entry-list" style={{width: '100%'}}>
+                                                {this.state.new_entry_options && this.state.new_entry_options.map((entry_option, index) => {
                                                     return (
-                                                        <li key={index}>
-                                                            <div
-                                                                className={entry_option.entry_color_class + " entry-listing color-white"}>
+                                                        <div key={index} style={{width: '50%', margin: '0 auto'}}>
+                                                            <div className={entry_option.entry_color_class + " entry-listing color-white"}
+                                                                 style={{justifyContent: 'space-between'}}>
                                                                 <div className="Entry-list-icon"><i
                                                                     className={entry_option.entry_icon}
                                                                     aria-hidden="true"/></div>
-                                                                <div className="toggle-lable">
-                                                                    <label className="switch">
-                                                                        <input type="checkbox" defaultChecked/>
-                                                                        <span className="slider round"/>
-                                                                    </label>
-                                                                </div>
                                                                 <div
                                                                     className="title-entry">{entry_option.entry_label}
                                                                 </div>
@@ -334,55 +332,27 @@ class UserSettings extends React.Component {
                                                                             onClick={() => {
                                                                                 this.handleEditGiveaway(entry_option.entry_url, index)
                                                                             }}
-                                                                            data-toggle="modal" data-target="#edit_giveaway_modal"
+                                                                            data-toggle="modal"
+                                                                            data-target="#edit_giveaway_modal"
                                                                     >Edit
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                        </li>
+                                                        </div>
                                                     )
                                                 })}
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <div className="Entry-list">
-                                            <ul>
-                                                {this.state.entry_options.map((entry_option, index) => {
-                                                    return (
-                                                        <li key={index}>
-                                                            <div
-                                                                className={entry_option.entry_color_class + " entry-listing color-white"}>
-                                                                <div className="Entry-list-icon"><i
-                                                                    className={entry_option.entry_icon}
-                                                                    aria-hidden="true"/></div>
-                                                                <div className="toggle-lable">
-                                                                    <label className="switch">
-                                                                        <input type="checkbox" defaultChecked/>
-                                                                        <span className="slider round"/>
-                                                                    </label>
-                                                                </div>
-                                                                <div
-                                                                    className="title-entry">{entry_option.entry_label}</div>
-                                                                <div className="entry-link"><Link to="#">EDIT</Link>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <button type={"button"}
                                                 className="add-btn own-btn btn btn-blue btn-primary uppercase"
                                                 data-toggle="modal" data-target="#add_giveaway_modal">
-                                            Add giveaway
+                                            Add Entry
                                         </button>
                                     </div>
                                     <div className="col-md-6">
                                         <button onClick={this.handleStartGiveaway}
-                                            className="start-btn own-btn btn btn-blue btn-primary uppercase">start
+                                                className="start-btn own-btn btn btn-blue btn-primary uppercase">start
                                             giveaway
                                         </button>
                                     </div>
@@ -421,9 +391,9 @@ class UserSettings extends React.Component {
                                                onChange={this.onChangeEditGiveaway}
                                                name={"update_giveaway"}
                                                value={
-                                                   this.state.update_giveaway !== this.state.edit_giveaway?
-                                                        this.state.edit_giveaway :
-                                                        this.state.update_giveaway}
+                                                   this.state.update_giveaway !== this.state.edit_giveaway ?
+                                                       this.state.edit_giveaway :
+                                                       this.state.update_giveaway}
 
                                                className="form-control form-own"/>
                                     </div>
@@ -431,7 +401,7 @@ class UserSettings extends React.Component {
                             </div>
                             <div className="modal-footer">
                                 <NavLink
-                                    to={this.state.update_giveaway? this.state.update_giveaway : this.state.edit_giveaway}
+                                    to={this.state.update_giveaway ? this.state.update_giveaway : this.state.edit_giveaway}
                                     style={{marginRight: '15px'}}
                                     target={"_blank"}>
                                     <button type="button"
@@ -461,19 +431,30 @@ class UserSettings extends React.Component {
                                 <button type="button" className="close" data-dismiss="modal"
                                         aria-label="Close"><span
                                     aria-hidden="true">&times;</span></button>
-                                <h4 className="modal-title" id="myModalLabel">Adding new
-                                    giveaway</h4>
+                                <h4 className="modal-title" id="myModalLabel">
+                                    Adding new entry</h4>
                             </div>
                             <div className="modal-body">
-                                <div className="form-container">
-                                    <label className="col-sm-5 col-md-5 col-lg-5 control-label">
-                                        Input new giveaway</label>
-                                    <div className="col-sm-7 col-md-7 col-lg-7">
-                                        <input type="text" onChange={this.onChangeAddGiveaway}
-                                               name={"new_giveaway"} value={this.state.new_giveaway}
-                                               placeholder={"new-giveaway"}
-                                               className="form-control form-own"/>
-                                    </div>
+                                <div className="form-container" style={{flexWrap: "wrap"}}>
+                                    {
+                                        this.state.entry_options.map((entry_option, index) => {
+                                            return (
+                                                <button key={index}
+                                                        onClick={() => this.handleChooseEntry(index)}
+                                                        className={"entry-box " + entry_option.entry_color_class}
+                                                        style={{border: 'none'}}>
+
+                                                    <div style={{textAlign: 'center'}}>
+                                                        <i className={entry_option.entry_icon}
+                                                           aria-hidden="true"/> <br/>
+                                                        {entry_option.entry_label}
+                                                    </div>
+
+                                                </button>
+                                            )
+                                        })
+                                    }
+
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -484,7 +465,7 @@ class UserSettings extends React.Component {
                                         Preview
                                     </button>
                                 </NavLink>
-                                <button onClick={this.handleAddNewGiveaway}
+                                <button onClick={this.handleAddNewEntry}
                                         type="button"
                                         data-dismiss="modal"
                                         className="btn btn-primary">

@@ -666,7 +666,7 @@ h5 {
 }
 
 .Entry-list-icon {
-    width: 10%;
+    /*width: 10%;*/
     float: left;
 }
 
@@ -678,13 +678,13 @@ h5 {
 }
 
 .title-entry {
-    width: 50%;
+    /*width: 50%;*/
     float: left;
     font-size: 16px;
 }
 
 .entry-link {
-    width: 20%;
+    /*width: 20%;*/
     text-align: right;
 }
 
@@ -695,7 +695,7 @@ h5 {
 }
 
 .entry-listing {
-    padding: 3px;
+    padding: 3px 10px;
     display: flex;
     margin-bottom: 8px;
     align-items: center;
@@ -1343,4 +1343,12 @@ input:checked + .slider:before {
 .form-container {
     display: flex;
     align-items: center;
+}
+.entry-box {
+    max-width: 100px;
+    min-width: 100px;
+    min-height: 60px;
+    margin: 10px 5px;
+    display: flex;
+    justify-content: center;
 }

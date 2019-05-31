@@ -1,5 +1,6 @@
 import React from 'react'
-import {Link, NavLink} from "react-router-dom";
+import { NavLink} from "react-router-dom";
+import { FRONTEND_URL} from "../utility";
 // import Popup from "reactjs-popup";
 
 let temp_new_entry_option = {}
@@ -15,36 +16,36 @@ class UserSettings extends React.Component {
             social_connections: [{
                 icon: 'fa fa-steam',
                 label: 'steam',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             }, {
                 icon: 'fa fa-twitch',
                 label: 'twitch',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             }, {
                 icon: 'fa fa-twitter',
                 label: 'twitter',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             }, {
                 icon: 'fa fa-facebook',
                 label: 'facebook',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             }, {
-                icon: 'fa fa-slideshare',
-                label: 'steam',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                icon: 'fab fa-discord',
+                label: 'discord',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             }, {
                 icon: 'fa fa-youtube-play',
                 label: 'youtube',
-                check_img: process.env.PUBLIC_URL + 'assets/images/tick.png',
+                check_img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/tick.png',
                 username: 'user name'
             },],
             user: {
-                img: process.env.PUBLIC_URL + 'assets/images/user-img.png',
+                img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/user-img.png',
                 name: 'user Name',
                 type: 'account type'
             },
@@ -88,6 +89,12 @@ class UserSettings extends React.Component {
                 entry_icon: 'fa fa fa-steam',
                 entry_label: 'join steam group',
                 entry_url: 'giveaway6'
+            },
+            {
+                entry_color_class: 'bg-primary',
+                entry_icon: 'fas fa-external-link-square-alt',
+                entry_label: 'Visit Website',
+                entry_url: 'giveaway7'
             },],
             edit_giveaway_index: 0
         }
@@ -151,10 +158,76 @@ class UserSettings extends React.Component {
         })
         this.state.new_entry_options.push(temp_new_entry_option)
     }
+    handleStartGiveaway=() => {
+      var entries = ''
+      var length = this.state.new_entry_options.length
+      for (var i = 0; i < length; i++) {
+        entries += this.state.new_entry_options[i].entry_icon + '/' + this.state.new_entry_options[i].entry_label + '/' + this.state.new_entry_options[i].entry_url + ','
 
-    handleStartGiveaway = () => {
-        window.alert(JSON.stringify(this.state.new_entry_options, null, 2))
+      }
+      const pitems = [];
+        const itemData = {
+          //title = document.getElementById('title')
+          // imgurl :'imgurl',
+          // expire : document.getElementById('enddate'),
+          title:'title',
+          description:'document.getElementById("comment")',
+          entries: entries,
+          imgurl :'imgurl',
+          expire : '2011-05-25',
+      }
+      pitems.push(itemData);
+      console.log(pitems)
+      const pbody = {
+        items: pitems
+      }
+      fetch('http://localhost:8000/api/giveaway/add-giveaway/', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Token '
+          },
+          body: JSON.stringify(pbody)
+        })
+        
     }
+    LoadProfile=() => {
+      //TODO Load Image from AWS
+      var xhr = new XMLHttpRequest();
+      var url = "http://localhost:8000/api/profile/";
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader('Authorization', 'Token ')
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            var json = json[0]
+            console.log('json',json)
+            let data = Object.assign({}, this.state.social_connections);
+            let user = Object.assign({}, this.state.user);
+            data[0].username = json['steam']
+            data[1].username = json['twitch']
+            data[2].username = json['twitter']
+            data[3].username = json['facebook']
+            data[4].username = json['discord']
+            data[5].username = json['youtube']
+            //user.img = json['img']
+            //TODO Make a prop(redux) for username
+            user.name = json['user']
+            user.type = 'Premium'
+            this.setState({data})
+            this.setState({user})
+          }
+        }.bind(this);
+      xhr.send();
+      console.log('state',this.state)
+    }
+    componentDidMount(){
+  // TODO
+  this.LoadProfile()
+
+}
+
 
     render() {
         // document.getElementById("defaultOpen").click();
@@ -318,9 +391,8 @@ class UserSettings extends React.Component {
                                         <div className="Entry-list" style={{width: '100%'}}>
                                                 {this.state.new_entry_options && this.state.new_entry_options.map((entry_option, index) => {
                                                     return (
-                                                        <div key={index} style={{width: '50%', margin: '0 auto'}}>
-                                                            <div className={entry_option.entry_color_class + " entry-listing color-white"}
-                                                                 style={{justifyContent: 'space-between'}}>
+                                                        <div className={"col-md-6"} key={index}>
+                                                            <div className={entry_option.entry_color_class + " entry-listing color-white"}>
                                                                 <div className="Entry-list-icon"><i
                                                                     className={entry_option.entry_icon}
                                                                     aria-hidden="true"/></div>

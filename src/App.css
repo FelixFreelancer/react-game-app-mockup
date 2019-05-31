@@ -4,7 +4,29 @@
     box-sizing: border-box;
     list-style: none;
 }
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
 
+* { margin: 0; padding: 0; }
+body { font: 14px Georgia, serif; }
+
+article, aside, figure, footer, header, hgroup,
+menu, nav, section { display: block; }
+
+#page-wrap { width: 490px; margin: 80px auto; }
+
+body { background: #333; text-align: center; color: #eee; font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+h1 { font-size: 42px; font-weight: 600; margin: 0 0 30px 0; }
+
+pre {
+	background: black;
+	text-align: left;
+	padding: 20px;
+	margin: 0 auto 30px auto;
+}
 body {
     font-family: 'Heebo', sans-serif;
     font-size: 11px;
@@ -315,7 +337,7 @@ h5 {
 }
 
 .progr ul li {
-    display: inline-flex;
+    /*display: inline-flex;*/
 }
 
 .btn-blue {
@@ -666,7 +688,7 @@ h5 {
 }
 
 .Entry-list-icon {
-    /*width: 10%;*/
+    width: 10%;
     float: left;
 }
 
@@ -678,13 +700,13 @@ h5 {
 }
 
 .title-entry {
-    /*width: 50%;*/
+    width: 50%;
     float: left;
     font-size: 16px;
 }
 
 .entry-link {
-    /*width: 20%;*/
+    width: 20%;
     text-align: right;
 }
 
@@ -695,7 +717,7 @@ h5 {
 }
 
 .entry-listing {
-    padding: 3px 10px;
+    padding: 3px;
     display: flex;
     margin-bottom: 8px;
     align-items: center;
@@ -1351,4 +1373,15 @@ input:checked + .slider:before {
     margin: 10px 5px;
     display: flex;
     justify-content: center;
+}
+.progress {
+    height: 15px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    background-color: black;
+    border:1px solid #e08e00;
+}
+.progress-bar {
+    background-color: #e08e00;
 }

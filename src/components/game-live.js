@@ -1,66 +1,69 @@
 import React from 'react'
 import SideBar from "./sidebar";
 import { Link } from 'react-router-dom'
-import {server_url} from "../utility";
+import {FRONTEND_URL} from "../utility";
 
 class GameLive extends React.Component {
     state = {
         game_category: {
-            img: server_url+process.env.PUBLIC_URL + 'assets/images/cate-img1.png',
+            img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/cate-img1.png',
             game_title: 'counter-Strike',
             game_region: 'Global Offensive'
         },
         stream_entries: [{
             url: '/user1/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user2/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user3/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user4/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user5/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user6/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user7/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },{
             url: '/user8/live-stream',
-            main_img: server_url+process.env.PUBLIC_URL + 'assets/images/video.png',
-            user_img: server_url+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
+            main_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/video.png',
+            user_img: FRONTEND_URL+process.env.PUBLIC_URL + 'assets/images/thumb-img1.png',
             stream_title: 'stream title',
             user_name: 'User name'
         },]
     }
-
+    componentDidMount(){
+      //TODO Call my API for current streamers and give it gameID to return only current live channels streaming that game
+      // TODO Make an array of objects setting username,Title, thumbnail, and get users avatar from profile API call and users url for channel.
+    }
     render() {
         return (
             <div>

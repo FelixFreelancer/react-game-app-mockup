@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-datepicker.js
+ * bootstrap-datepicker.redux
  * http://www.eyecon.ro/bootstrap-datepicker
  * =========================================================
  * Copyright 2012 Stefan Petre
@@ -519,7 +519,7 @@
 						if (!target.is('.disabled')) {
 							this.viewDate.setUTCDate(1);
 							if (target.is('.month')) {
-								var month = target.parent().find('span').index(target);
+								var month = target.parent().find('span').authReducer(target);
 								this.viewDate.setUTCMonth(month);
 								this.element.trigger({
 									type: 'changeMonth',

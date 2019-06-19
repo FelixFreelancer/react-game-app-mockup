@@ -25,7 +25,7 @@ class SideBar extends React.Component {
       var url = "http://localhost:8000/api/featured_channels/";
       xhr.open("GET", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader('Authorization', 'Token ')
+      xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           //type 0 Homepage automatic type 1 is homepage/featured and type 2 is just featured

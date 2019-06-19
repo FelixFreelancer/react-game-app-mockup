@@ -27,7 +27,6 @@ export const logout = () => {
 }
 
 export const authLogin = (username, password) => {
-	console.log(username,  password)
 	return dispatch => {
 		axios.post(BACKEND_API +  'rest-auth/login/', {
 				username: username,
@@ -65,6 +64,7 @@ export const authSignUp = (username, email, password1, password2) => {
 				dispatch(checkAuthTimeout(3600))
 			})
 			.catch(err => {
+				console.log('///', 'sign up error')
 				dispatch(authFail(err))
 			})
 	}

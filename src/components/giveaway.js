@@ -69,7 +69,7 @@ class Giveaway extends React.Component {
   var url = "http://localhost:8000/api/featured_giveaways/";
   xhr.open("GET", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader('Authorization', 'Token ')
+  xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var json = JSON.parse(xhr.responseText);
@@ -116,7 +116,7 @@ loadGiveaway = (data) => {
   var url = "http://localhost:8000/api/giveaway/?ids=2,3,4,5,6,7";
   xhr.open("GET", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader('Authorization', 'Token ')
+  xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var json = JSON.parse(xhr.responseText);

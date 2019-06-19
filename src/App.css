@@ -270,7 +270,9 @@ h5 {
 .p-b20 {
     padding-bottom: 20px;
 }
-
+.p-t20 {
+	padding-top: 20px;
+}
 .p-t10 {
     padding-top: 10px;
 }
@@ -608,7 +610,16 @@ h5 {
     text-transform: uppercase;
     font-size: 14px;
 }
-
+.user-but-list {
+    display: flex;
+    justify-content: center;
+}
+.user-but-list ul {
+    width: 540px;
+}
+.user-but-list ul li {
+    text-align: left;
+}
 .user-but-list button {
     width: 55%;
     margin-bottom: 5px;
@@ -964,9 +975,9 @@ input:checked + .slider:before {
         width: 100%;
     }
 
-    .user-but-list button {
-        width: 30%;
-    }
+    /*.user-but-list button {*/
+    /*    width: 30%;*/
+    /*}*/
 
     #settings h2 {
         font-size: 20px;
@@ -1111,9 +1122,9 @@ input:checked + .slider:before {
         width: 70%;
     }
 
-    .user-but-list button {
-        width: 30%;
-    }
+    /*.user-but-list button {*/
+    /*    width: 30%;*/
+    /*}*/
 
     #settings h2 {
         font-size: 30px;
@@ -1254,9 +1265,9 @@ input:checked + .slider:before {
         width: 60%;
     }
 
-    .user-but-list button {
-        width: 20%;
-    }
+    /*.user-but-list button {*/
+    /*    width: 20%;*/
+    /*}*/
 
     #settings h2 {
         font-size: 30px;

@@ -13,6 +13,9 @@ class UserSettings extends React.Component {
             update_giveaway: '',
             new_giveaway: '',
             new_entry_options: [],
+            edit_social_connection: '',
+            update_social_connection: '',
+            edit_social_indexing : 0,
             social_connections: [{
                 icon: 'fa fa-steam',
                 label: 'steam',
@@ -49,7 +52,8 @@ class UserSettings extends React.Component {
                 name: 'user Name',
                 type: 'account type'
             },
-            select_stream_service: [{
+            select_stream_service: [
+                {
                 service: 'twitch'
             }, {
                 service: 'Facebook gaming',
@@ -59,7 +63,8 @@ class UserSettings extends React.Component {
                 service: 'Mixer'
             }],
             service_url: 'state url',
-            entry_options: [{
+            entry_options: [
+                {
                 entry_color_class: 'discord-bg',
                 entry_icon: 'fab fa-discord',
                 entry_label: 'JOIN DISCORD',
@@ -119,18 +124,18 @@ class UserSettings extends React.Component {
             service_url: event.target.value
         })
     }
-    onChangeAddGiveaway = (e) => {
-        this.setState({
-            new_giveaway: e.target.value
-        })
-    }
     onChangeEditGiveaway = (e) => {
         this.setState({
             edit_giveaway: e.target.value,
             update_giveaway: e.target.value,
         })
     }
-
+    onChangeEditSocialCon = (e) => {
+        this.setState({
+            update_social_connection: e.target.value,
+            edit_social_connection: e.target.value
+        })
+    }
     handleChooseEntry = (index) => {
         this.setState({
             new_giveaway: this.state.entry_options[index].entry_url
@@ -185,11 +190,38 @@ class UserSettings extends React.Component {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
-            'Authorization': 'Token '
+            'Authorization': 'Token c66f90d87d38eab260ae17db215294b289afcf45'
           },
           body: JSON.stringify(pbody)
         })
         
+    }
+    handleEditSocialCon = (e, connection, index) => {
+        e.preventDefault()
+        this.setState({
+            edit_social_connection : connection,
+            edit_social_indexing: index
+        })
+    }
+    handleUpdateSocialCon = () => {
+        alert(this.state.update_social_connection)
+        let update_social = this.state.social_connections
+        update_social = update_social.map((social, index) => {
+            if (index === this.state.edit_social_indexing) {
+                return {
+                    ...social,
+                    username: this.state.update_social_connection
+                }
+            }else {
+                return social
+            }
+        })
+        console.log(update_social)
+        this.setState({
+            update_social_connection : '',
+            edit_social_connection: '',
+            social_connections: update_social
+        })
     }
     LoadProfile=() => {
       //TODO Load Image from AWS
@@ -197,7 +229,7 @@ class UserSettings extends React.Component {
       var url = "http://localhost:8000/api/profile/";
       xhr.open("GET", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.setRequestHeader('Authorization', 'Token ')
+      xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
@@ -223,10 +255,10 @@ class UserSettings extends React.Component {
       console.log('state',this.state)
     }
     componentDidMount(){
-  // TODO
-  this.LoadProfile()
+    // TODO
+    this.LoadProfile()
 
-}
+    }
 
 
     render() {
@@ -315,14 +347,20 @@ class UserSettings extends React.Component {
                                             {this.state.social_connections.map((connection, index) => {
                                                 return (
                                                     <li key={index}>
-                                                        <button className="own-btn btn btn-blue btn-primary uppercase">
-                                                            <span><i className={connection.icon}
-                                                                     aria-hidden="true"/></span>
+                                                        <button className="own-btn btn btn-blue btn-primary uppercase"
+                                                                data-toggle={"modal"}
+                                                                data-target={"#social_connection_modal"}
+                                                                onClick={(e) => this.handleEditSocialCon(e, connection.username, index) }>
+                                                            <span>
+                                                                <i className={connection.icon}
+                                                                     aria-hidden="true"/>
+                                                            </span>
                                                             {connection.label}
                                                         </button>
-                                                        <span> <span><img
-                                                            src={connection.check_img} alt={"check"}
-                                                            className="img-responsive"/></span> {connection.username}</span>
+                                                        <span> <span>
+                                                            <img src={connection.check_img} alt={"check"}
+                                                                className="img-responsive"/>
+                                                        </span> {connection.username}</span>
                                                     </li>
                                                 )
                                             })}
@@ -548,7 +586,52 @@ class UserSettings extends React.Component {
                     </div>
                 </div>
                 {/* adding giveaway modal part end */}
-
+                {/* ===============  social connection modal*/}
+                <div className="modal fade" id="social_connection_modal" tabIndex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div className={"modal-dialog"} role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                <h4 className="modal-title" id="myModalLabel">
+                                    Editing Social Connection</h4>
+                            </div>
+                            <div className="modal-body">
+                                <div className="form-container">
+                                    <label
+                                        className="col-sm-5 col-md-5 col-lg-5 control-label">
+                                        Update Social Connection
+                                    </label>
+                                    <div
+                                        className="col-sm-7 col-md-7 col-lg-7">
+                                        <input type="text"
+                                               onChange={this.onChangeEditSocialCon}
+                                               name={"update_social_connection"}
+                                               // defaultValue={this.state.update_social_connection}
+                                               value={
+                                                   this.state.update_social_connection !== this.state.edit_social_connection ?
+                                                       this.state.edit_social_connection :
+                                                       this.state.update_social_connection}
+                                               className="form-control form-own"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    onClick={this.handleUpdateSocialCon}
+                                    type="button"
+                                    data-dismiss="modal"
+                                    className="btn btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/*    ===============  social connection modal*/}
             </div>
         )
     }

@@ -8,12 +8,16 @@ class LiveStream extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			online_status: true,
+			giveaway_entries_staus: true,
+			past_winner_status: true,
 			giveaway_entries: [],
 			giveaway_credits: '',
 			progress_value: 0,
 			timerID: '',
 			progress_timerId: '',
-			ads_channels: [{
+			ads_channels: [
+				{
 				img: FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/img3.jpg',
 				url: '/ads-channel1'
 			}, {
@@ -136,7 +140,7 @@ class LiveStream extends React.Component {
 		var url = "http://localhost:8000/api/usergiveaway/";
 		xhr.open("GET", url, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader('Authorization', 'Token ')
+		xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var json = JSON.parse(xhr.responseText);
@@ -161,6 +165,11 @@ class LiveStream extends React.Component {
 				this.setState({giveaway_entries: entries})
 				this.setState({giveaway_header_title: json['title']})
 				this.setState({giveaway_description: json['description']})
+			}else {
+				
+				this.setState({
+					online_status: !this.state.online_status
+				})
 			}
 		}.bind(this)
 		xhr.send();
@@ -179,7 +188,6 @@ class LiveStream extends React.Component {
 			this.setState({
 				progress_value: 0
 			})
-			return
 		}else {
 			
 			this.setState({
@@ -195,7 +203,7 @@ class LiveStream extends React.Component {
 		var url = "http://localhost:8000/api/profile/";
 		xhr.open("GET", url, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader('Authorization', 'Token ')
+		xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState === 4 && xhr.status === 200) {
 				var json = JSON.parse(xhr.responseText);
@@ -293,7 +301,7 @@ class LiveStream extends React.Component {
 		var url = "http://localhost:8000/api/test/";
 		xhr.open("GET", url, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader('Authorization', 'Token ')
+		xhr.setRequestHeader('Authorization', 'Token c66f90d87d38eab260ae17db215294b289afcf45')
 		xhr.onreadystatechange = () => {
 			if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 400) {
 				var json = JSON.parse(xhr.responseText);
@@ -312,7 +320,7 @@ class LiveStream extends React.Component {
 						<SideBar/>
 						<div className="col-md-9">
 							{
-								this.props.online_status ? <div className={"live-stream-featured-links row"}>
+								this.state.online_status ? <div className={"live-stream-featured-links row"}>
 									<div className="col-md-8 bg-gray mar-bot30 gutter">
 										<div className="embed-responsive embed-responsive-16by9">
 											<iframe id="video" className="embed-responsive-item"
@@ -372,155 +380,165 @@ class LiveStream extends React.Component {
 								</div> : <div></div>
 							}
 							
-							<div className="col-md-12 bg-gray m-b-30">
-								<div className="col-lg-7 col-md-12 margin-top20">
-									<h1 className="uppercase p-t-15">{this.state.giveaway_header_title}</h1>
-									<div className="col-lg-6 col-md-6 col-sm-12">
-										<img alt={"thumbnail"}
-										     src={FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/img5.png'}
-										     className="img-responsive img-but"/></div>
-									<div className="col-lg-6 col-md-6 col-sm-12 center">
-										<button className="own-btn btn btn-blue btn-primary uppercase">entry</button>
-										<button className="own-btn btn btn-blue btn-primary uppercase">Time Left
-										</button>
-										<p className="uppercase padding-top20">{this.state.giveaway_description}</p>
-									</div>
-									<div className="col-md-12"><p
-										className="center padding-top20 uppercase">{this.state.complete_coin_title}</p>
-									</div>
-									<div className="col-md-12 bg-black dis-inline ">
-										<div className="hyperex padding-top20">
-											<ul>
-												{this.state.giveaway_entries.map((complete_coin, index) => {
-													return (
-														<li key={index}>
-															<div className="flout-left s-f">
+							<div className="  m-b-30" style={{display: 'flex', position: 'relative'}}>
+								{
+									this.state.giveaway_entries_staus ?
+										<div className="col-lg-7 col-md-12  bg-gray p-t20">
+											<h1 className="uppercase p-t-15">{this.state.giveaway_header_title}</h1>
+											<div className="col-lg-6 col-md-6 col-sm-12">
+												<img alt={"thumbnail"}
+												     src={FRONTEND_URL + process.env.PUBLIC_URL + 'assets/images/img5.png'}
+												     className="img-responsive img-but"/></div>
+											<div className="col-lg-6 col-md-6 col-sm-12 center">
+												<button className="own-btn btn btn-blue btn-primary uppercase">entry</button>
+												<button className="own-btn btn btn-blue btn-primary uppercase">Time Left
+												</button>
+												<p className="uppercase padding-top20">{this.state.giveaway_description}</p>
+											</div>
+											<div className="col-md-12"><p
+												className="center padding-top20 uppercase">{this.state.complete_coin_title}</p>
+											</div>
+											<div className="col-md-12 bg-black dis-inline ">
+												<div className="hyperex padding-top20">
+													<ul>
+														{this.state.giveaway_entries.map((complete_coin, index) => {
+															return (
+																<li key={index}>
+																	<div className="flout-left s-f">
                                                         <span>
                                                             <i className={complete_coin.icon}
                                                                aria-hidden="true"/>
                                                         </span>
-																{complete_coin.label}
-															</div>
-															<div className="flout-right s-f bg-gray">
-																<div>
-																	<button className={"img-button"}>
-																		<img alt={"box thumbnail"}
-																		     src={complete_coin.box_image}
-																		     className="img-responsive leable-img"/>
-																	</button>
-																	{complete_coin.coin_amount}
-																</div>
-															</div>
-														</li>
-													
-													)
-												})}
-											</ul>
-											<div className="flout-left">
-												<p className="text-but">{this.state.complete_coin_footer}</p></div>
-											<div className="flout-right">
-												<div className="bot-listing">
-													<ul>
-														<li><i className="fa fa-database database" aria-hidden="true"/>
-														</li>
-														<li className="bg-gray">{this.state.complete_coin_footer_coins}</li>
-														<li>
-															<button
-																className="own-btn btn btn-gray btn-primary uppercase"
-																onClick={this.testingAPIs}>Enter
+																		{complete_coin.label}
+																	</div>
+																	<div className="flout-right s-f bg-gray">
+																		<div>
+																			<button className={"img-button"}>
+																				<img alt={"box thumbnail"}
+																				     src={complete_coin.box_image}
+																				     className="img-responsive leable-img"/>
+																			</button>
+																			{complete_coin.coin_amount}
+																		</div>
+																	</div>
+																</li>
 															
-															</button>
-														</li>
+															)
+														})}
 													</ul>
+													<div className="flout-left">
+														<p className="text-but">{this.state.complete_coin_footer}</p></div>
+													<div className="flout-right">
+														<div className="bot-listing">
+															<ul>
+																<li><i className="fa fa-database database" aria-hidden="true"/>
+																</li>
+																<li className="bg-gray">{this.state.complete_coin_footer_coins}</li>
+																<li>
+																	<button
+																		className="own-btn btn btn-gray btn-primary uppercase"
+																		onClick={this.testingAPIs}>Enter
+																	
+																	</button>
+																</li>
+															</ul>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div className="col-md-12"><p
-										className="center padding-top20 uppercase">{this.state.bonus_coins_title}</p>
-									</div>
-									<div className="col-md-12 bg-black dis-inline mar-bot30">
-										<div className="hyperex padding-top20">
-											<ul>
-												{this.state.bonus_coins.map((bonus_coin, index) => {
-													return (
-														<li key={index}>
-															<div className="flout-left s-f">
+											<div className="col-md-12"><p
+												className="center padding-top20 uppercase">{this.state.bonus_coins_title}</p>
+											</div>
+											<div className="col-md-12 bg-black dis-inline mar-bot30">
+												<div className="hyperex padding-top20">
+													<ul>
+														{this.state.bonus_coins.map((bonus_coin, index) => {
+															return (
+																<li key={index}>
+																	<div className="flout-left s-f">
                                                         <span>
                                                             <i className={bonus_coin.icon}
                                                                aria-hidden="true"/>
                                                         </span>
-																{bonus_coin.label}
-															</div>
-															<div className="flout-right s-f bg-gray">
-																<div>
-																	<button className={"img-button"}>
-																		<img alt={"box thumbnail"}
-																		     src={bonus_coin.box_image}
-																		     className="img-responsive leable-img"/>
+																		{bonus_coin.label}
+																	</div>
+																	<div className="flout-right s-f bg-gray">
+																		<div>
+																			<button className={"img-button"}>
+																				<img alt={"box thumbnail"}
+																				     src={bonus_coin.box_image}
+																				     className="img-responsive leable-img"/>
+																			</button>
+																			{bonus_coin.coin_amount}
+																		</div>
+																	</div>
+																</li>
+															)
+														})}
+													</ul>
+													<div className="flout-left"><p
+														className="text-but">{this.state.bonus_coins_footer}</p></div>
+													<div className="flout-right">
+														<div className="bot-listing">
+															<ul>
+																<li><i className="fa fa-database database" aria-hidden="true"/>
+																</li>
+																<li className="bg-gray">{this.state.bonus_coins_footer_coins}</li>
+																<li>
+																	<button
+																		className="own-btn btn btn-gray btn-primary uppercase"
+																		onClick={this.gettestingAPIs}>Enter
 																	</button>
-																	{bonus_coin.coin_amount}
-																</div>
-															</div>
-														</li>
-													)
-												})}
-											</ul>
-											<div className="flout-left"><p
-												className="text-but">{this.state.bonus_coins_footer}</p></div>
-											<div className="flout-right">
-												<div className="bot-listing">
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div> :
+										''
+								}
+							
+								{
+									this.state.past_winner_status ?
+										<div className="col-lg-5 col-md-12 col-sm-12 bg-gray p-b20 p-t20">
+											<h1 className="uppercase center">past winners</h1>
+											<div className="bg-black">
+												<div className="past-winners">
 													<ul>
-														<li><i className="fa fa-database database" aria-hidden="true"/>
-														</li>
-														<li className="bg-gray">{this.state.bonus_coins_footer_coins}</li>
-														<li>
-															<button
-																className="own-btn btn btn-gray btn-primary uppercase"
-																onClick={this.gettestingAPIs}>Enter
-															</button>
-														</li>
+														{this.state.past_winners.map((past_winner, index) => {
+															return (
+																<li key={index}>
+																	<div className="flout-left">
+																		<div className="flout-left">
+																			<img alt={"past winner"}
+																			     src={past_winner.img}
+																			     className="img-responsive"/>
+																		</div>
+																		<div className="flout-right side-past-date">
+																			<h2 className="color-blue uppercase">{past_winner.username}</h2>
+																			<h4 className="uppercase">{past_winner.title}</h4>
+																		</div>
+																	</div>
+																	<div
+																		className="flout-right padding-top20">{past_winner.date}</div>
+																</li>
+															)
+														})}
+													
 													</ul>
 												</div>
 											</div>
-										</div>
-									</div>
-								</div>
-								<div className="col-lg-5 col-md-12 col-sm-12 margin-top20 p-b20">
-									<h1 className="uppercase center">past winners</h1>
-									<div className="bg-black">
-										<div className="past-winners">
-											<ul>
-												{this.state.past_winners.map((past_winner, index) => {
-													return (
-														<li key={index}>
-															<div className="flout-left">
-																<div className="flout-left">
-																	<img alt={"past winner"}
-																	     src={past_winner.img}
-																	     className="img-responsive"/>
-																</div>
-																<div className="flout-right side-past-date">
-																	<h2 className="color-blue uppercase">{past_winner.username}</h2>
-																	<h4 className="uppercase">{past_winner.title}</h4>
-																</div>
-															</div>
-															<div
-																className="flout-right padding-top20">{past_winner.date}</div>
-														</li>
-													)
-												})}
-											
-											</ul>
-										</div>
-									</div>
-								</div>
+										</div> :
+										''
+								}
+								
 							</div>
 						</div>
-						<div className={"col-md-2 " + (this.props.online_status ? '' : 'bg-gray')}>
+						<div className={"col-md-2 " + (this.state.online_status ? '' : 'bg-gray')}>
 							<div className="">
 								{
-									this.props.online_status ?
+									this.state.online_status ?
 										<div>
 											<div className="chat-bg">
 												<img alt={"chat bg"}

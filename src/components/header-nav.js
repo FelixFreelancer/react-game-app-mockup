@@ -8,7 +8,7 @@ class HeaderNav extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			texttextemail: '',
+			textemail: '',
 			textpassword: '',
 			textfirst: '',
 			textlast: '',
@@ -86,31 +86,7 @@ class HeaderNav extends React.Component {
 		if (this.state.textpass === this.state.textpassC && this.state.textemail !== '' && this.state.textuser !== '' && this.state.textpass !== '' && this.state.textpassC !== '') {
 			this.props.authSignUp(this.state.textusername,this.state.textemail,this.state.textpass, this.state.textpassC )
 		}
-		
 	}
-	registerUser = () => {
-		if (this.state.textpass === this.state.textpassC && this.state.textemail !== '' && this.state.textuser !== '' && this.state.textpass !== '' && this.state.textpassC !== '') {
-			var xhr = new XMLHttpRequest();
-			var url = "http://localhost:8000/api/rest-auth/registration/";
-			xhr.open("POST", url, true);
-			xhr.setRequestHeader("Content-Type", "application/json");
-			xhr.onreadystatechange = () => {
-				if (xhr.readyState === 4 && xhr.status === 200 || xhr.status === 400) {
-					var json = JSON.parse(xhr.responseText);
-					console.log(json)
-					//this.loginUser()
-				}
-			};
-			var data = JSON.stringify({
-				"username": this.state.textuser,
-				"email": this.state.textemail,
-				"password1": this.state.textpass,
-				"password2": this.state.textpassC
-			});
-			xhr.send(data);
-		}
-	}
-	
 	render() {
 		return (
 			<div>
@@ -166,7 +142,7 @@ class HeaderNav extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								{
-									this.state.login_username !== '' ?
+									this.props.token !== null ?
 										<li>
 											<button type="button" className="btn btn-primary"
 											        onClick={this.props.authLogOut}>
@@ -299,7 +275,8 @@ class HeaderNav extends React.Component {
 const matStateToProps = state => {
 	return {
 		token: state.auth.token,
-		username: state.auth.username
+		username: state.auth.username,
+		error: state.auth.error
 	}
 }
 const mapDispatchToProps = dispatch => {
